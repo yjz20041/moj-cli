@@ -1,0 +1,19 @@
+{
+  "name": "moj-cli",
+  "version": "0.1.0",
+  "description": "开发通用npm包脚手架命令工具",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yjz20041/moj-cli.git"
+  },
+  "author": "yjz20041",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yjz20041/moj-cli/issues"
+  },
+  "homepage": "https://github.com/yjz20041/moj-cli#readme"
+}
