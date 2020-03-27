@@ -4,7 +4,8 @@
   "description": "开发通用npm包脚手架命令工具",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "echo \"eslint start...\" && eslint --ext .js -f table lib/ bin/ && echo \"eslint finish\" "
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/yjz20041/moj-cli/issues"
   },
-  "homepage": "https://github.com/yjz20041/moj-cli#readme"
+  "homepage": "https://github.com/yjz20041/moj-cli#readme",
+  "dependencies": {
+    "eslint": "^6.8.0",
+    "pre-commit": "^1.2.2"
+  },
+  "pre-commit": [
+    "lint"
+  ]
 }
