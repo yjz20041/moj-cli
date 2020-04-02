@@ -4,10 +4,10 @@ const command_init = require('../command/init');
 
 program.version(require('../package').version);
 
-program.usage('<command> <type>')
+program.usage('<command>')
 
 program
-  .command('init <type>')
+  .command('init')
   .description('初始化工程')
   .action(command_init);
 

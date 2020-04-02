@@ -80,7 +80,15 @@ const existDir = (name) => {
   });
 }
 
-const init = async (type) => {
+const init = async () => {
+  const type = (await inquirer.prompt([
+    {
+      name: 'type',
+      message: '请选择项目类型',
+      type: 'list',
+      choices: ['component', 'h5', 'rn']
+    }
+  ])).type;
   const answers = await inquirer.prompt([
     {
       name: 'projectName',
