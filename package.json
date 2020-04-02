@@ -1,8 +1,11 @@
 {
   "name": "moj-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "开发通用npm包脚手架命令工具",
   "main": "index.js",
+  "bin": {
+    "moj-cli": "./bin/index.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "echo \"eslint start...\" && eslint --ext .js -f table lib/ bin/ && echo \"eslint finish\" "
