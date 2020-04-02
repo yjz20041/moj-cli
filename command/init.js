@@ -6,6 +6,8 @@ const fs = require('fs');
 const Metalsmith = require('metalsmith');
 const Handlebars = require('handlebars')
 const rm = require('rimraf').sync;
+const ora = require('ora');
+const chalk = require('chalk');
 
 
 const transform = (src, dist, metadata = {}) => {
@@ -32,18 +34,29 @@ const generate = (type, projectName, metaData = {}) => {
   const distPath = path.join(process.cwd(), projectName);
   const tmpPath = `${distPath}_tmp`;
   return new Promise((resolve, reject) => {
-    downloadGit(`https://github.com:yjz20041/moj-template-${type}`,
+    const url = `https://github.com:yjz20041/moj-template-${type}`;
+    const spinner = ora(`正在下载项目模板，源地址：${url}`)
+    spinner.start();
+    downloadGit(url,
       tmpPath,
       {
         clone: false
       }, 
       (error) => {
         if (error) {
+          spinner.fail();
           reject(error);
         } else {
+          spinner.succeed();
           transform(tmpPath, distPath, metaData)
-            .then(resolve)
-            .catch(reject)
+            .then(() => {
+              console.log(chalk.green(`项目创建成功，项目类型为：${type}，请执行cd ${projectName} nenpm install 进行安装`));
+              resolve();
+            })
+            .catch(() => {
+              console.log(chalk.red('项目创建失败'));
+              reject();
+            })
             .finally(() => {
               // 移除临时目录
               rm(tmpPath);
