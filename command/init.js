@@ -94,6 +94,21 @@ const init = async (type) => {
       return;
     }
   }
+  // 组件脚手架需要选择类型
+  if (type === 'component') {
+    const componentType = (await inquirer.prompt([
+      {
+        name: 'type',
+        message: '组件类型',
+        type: 'list',
+        choices: ['react', 'regular', 'other']
+      }
+    ])).type;
+    metadata.isReact = componentType === 'react';
+    metadata.isRegular = componentType === 'regular';
+  }
+
+  // 是否接入云音乐编码规范
   metadata.elint = (await inquirer.prompt([
     {
       name: 'elint',

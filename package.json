@@ -1,37 +1,36 @@
 {
-  "name": "",
-  "version": "1.0.0",
-  "description": "",
-  "main": "./src/index.js",
-  "module": "./es/index.js",
+  "name": "moj-cli",
+  "version": "0.1.0",
+  "description": "开发通用npm包脚手架命令工具",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf es && babel src --out-dir es --copy-files",
-    "watch": "babel src --watch --out-dir es --copy-files",
-    "lint": "echo \"eslint start...\" && eslint --ext .js -f table src/ && echo \"eslint finish\" ",
-    "prepublish": "echo \" prepublish... \" && npm run build "
+    "lint": "echo \"eslint start...\" && eslint --ext .js -f table lib/ bin/ && echo \"eslint finish\" "
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git+https://github.com/yjz20041/moj-cli.git"
   },
-  "author": "",
+  "author": "yjz20041",
   "license": "ISC",
-  "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.9.0",
-    "@babel/plugin-proposal-class-properties": "^7.8.3",
-    "@babel/plugin-proposal-decorators": "^7.8.3",
-    "@babel/preset-env": "^7.9.0",
-    "@babel/preset-react": "^7.9.4",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.8.0",
-    "pre-commit": "^1.2.2"
+  "bugs": {
+    "url": "https://github.com/yjz20041/moj-cli/issues"
   },
+  "homepage": "https://github.com/yjz20041/moj-cli#readme",
   "dependencies": {
-    "core-js": "^3.6.4"
+    "commander": "^5.0.0",
+    "download-git-repo": "^3.0.2",
+    "eslint": "^6.8.0",
+    "handlebars": "^4.7.3",
+    "inquirer": "^7.1.0",
+    "metalsmith": "^2.3.0",
+    "pre-commit": "^1.2.2",
+    "rimraf": "^3.0.2"
   },
   "pre-commit": [
     "lint"
-  ]
+  ],
+  "devDependencies": {
+    "babel-eslint": "^10.1.0"
+  }
 }
