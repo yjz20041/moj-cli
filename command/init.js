@@ -20,8 +20,10 @@ const transform = (src, dist, metadata = {}) => {
       .use((files, metalsmith, done) => {
         const meta = metalsmith.metadata();
         Object.keys(files).forEach(fileName => {
-          const t = files[fileName].contents.toString()
-          files[fileName].contents = Buffer.from(Handlebars.compile(t)(meta))
+          if (/\.(jsx?|package|json)/.test(fileName)) {
+            const t = files[fileName].contents.toString()
+            files[fileName].contents = Buffer.from(Handlebars.compile(t)(meta))
+          }
         })
         done();
       }).build(err => {
@@ -53,8 +55,8 @@ const generate = (type, projectName, metaData = {}) => {
               console.log(chalk.green(`项目创建成功，项目类型为：${type}，请执行cd ${projectName} nenpm install 进行安装`));
               resolve();
             })
-            .catch(() => {
-              console.log(chalk.red('项目创建失败'));
+            .catch((e) => {
+              console.log(chalk.red('项目创建失败', e));
               reject();
             })
             .finally(() => {
