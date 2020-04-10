@@ -132,13 +132,15 @@ const init = async () => {
   }
 
   // 是否接入云音乐编码规范
-  metadata.elint = (await inquirer.prompt([
-    {
-      name: 'elint',
-      message: '是否接入elint以及云音乐编码规范',
-      type: 'confirm'
-    }
-  ])).elint;
+  // metadata.elint = (await inquirer.prompt([
+  //   {
+  //     name: 'elint',
+  //     message: '是否接入elint以及云音乐编码规范',
+  //     type: 'confirm'
+  //   }
+  // ])).elint;
+  // 暂时都设为true
+  metadata.elint = true;
   generate(type, projectName, metadata);
 }
 
