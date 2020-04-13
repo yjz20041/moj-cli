@@ -1,6 +1,6 @@
 {
   "name": "moj-cli",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "开发通用npm包脚手架命令工具",
   "main": "index.js",
   "bin": {
