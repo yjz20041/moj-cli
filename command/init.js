@@ -20,7 +20,7 @@ const transform = (src, dist, metadata = {}) => {
       .use((files, metalsmith, done) => {
         const meta = metalsmith.metadata();
         Object.keys(files).forEach(fileName => {
-          if (/\.(jsx?|tsx?|package|json|md|jave|xml|gradle)/.test(fileName) || /_BUCK/.test(fileName)) {
+          if (/\.(jsx?|tsx?|package|json|md|java|xml|gradle)/.test(fileName) || /_BUCK/.test(fileName)) {
             const t = files[fileName].contents.toString()
             files[fileName].contents = Buffer.from(Handlebars.compile(t)(meta))
           }
