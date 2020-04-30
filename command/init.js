@@ -8,6 +8,7 @@ const Handlebars = require('handlebars')
 const rm = require('rimraf').sync;
 const ora = require('ora');
 const chalk = require('chalk');
+const shell = require('shelljs');
 
 
 const transform = (src, dist, metadata = {}) => {
@@ -20,7 +21,7 @@ const transform = (src, dist, metadata = {}) => {
       .use((files, metalsmith, done) => {
         const meta = metalsmith.metadata();
         Object.keys(files).forEach(fileName => {
-          if (/\.(jsx?|tsx?|package|json|md|java|xml|gradle)/.test(fileName) || /_BUCK/.test(fileName)) {
+          if (/Podfile|(\.(jsx?|tsx?|package|json|md|java|xml|gradle|plist|xib|pbxproj|xcscheme|m))/.test(fileName) || /_BUCK/.test(fileName)) {
             const t = files[fileName].contents.toString()
             files[fileName].contents = Buffer.from(Handlebars.compile(t)(meta))
           }
@@ -52,6 +53,21 @@ const generate = (type, projectName, metaData = {}) => {
           spinner.succeed();
           transform(tmpPath, distPath, metaData)
             .then(() => {
+              if (type === 'rn') {
+                [
+                  'mojv_rn_ios',
+                  'mojv_rn_ios-tvOS',
+                  'mojv_rn_ios-tvOSTests',
+                  'mojv_rn_ios.xcodeproj',
+                  'mojv_rn_iosTests'
+                ].forEach(item => {
+                  const d = `${distPath}/ios/`;
+                  const source = `${d + item}`;
+                  const target = source.replace('mojv_rn_ios', projectName);
+                  shell.exec(`mv ${source} ${target}`);
+                })
+                
+              }
               console.log(chalk.green(`项目创建成功，项目类型为：${type}，请执行cd ${projectName} nenpm install 进行安装`));
               resolve();
             })
@@ -104,6 +120,10 @@ const init = async () => {
   const metadata = {
     projectName
   };
+  if (!/^\w+$/.test(projectName)) {
+    console.log('项目名只能包含下划线、字母和数字');
+    return init(type);
+  }
   const exist = await existDir(projectName);
   if (exist) {
     const answers = await inquirer.prompt([

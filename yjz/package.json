@@ -1,0 +1,60 @@
+{
+  "name": "yjz",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "clean:cache": "rm -fr $TMPDIR/metro*",
+    "simulator:android": "sh ./script/android.sh",
+    "start": "npm run clean:cache && npm run simulator:android && react-native run-android",
+    "build:android:test": "node ./script/build --android",
+    "build:android": "node ./script/build --android",
+    "ios": "npm run clean:cache && react-native run-ios --port 8081 --simulator 'iPhone 11'",
+    "build:ios:test": "node ./script/build --ios",
+    "build:ios": "node ./script/build --ios",
+    "analysis:android": "react-native-bundle-visualizer --platform android --entry-file ./index.android.js",
+    "analysis:ios": "react-native-bundle-visualizer --platform ios --entry-file ./index.ios.js",
+    "server": "npm run clean:cache && react-native start",
+    "lint": "run-p lint:*",
+    "lint:js": "elint lint es \"**/*.js\" \"**/*.jsx\"",
+    "lint:css": "elint lint style \"**/*.css\" \"**/*.less\"",
+    "fix": "run-p fix:*",
+    "fix:js": "elint lint es \"**/*.js\"  \"**/*.jsx\" --fix",
+    "fix:css": "elint lint style \"**/*.css\" \"**/*.less\" --fix",
+    "beforecommit": "elint lint commit && npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
+    "@babel/runtime": "^7.6.2",
+    "@music/elint-preset-base": "^1.0.13",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-module-resolver": "4.0.0",
+    "elint": "^1.11.1",
+    "metro-react-native-babel-preset": "^0.58.0",
+    "npm-run-all": "^4.1.5",
+    "shelljs": "^0.8.3"
+  },
+  "dependencies": {
+    "@music/mnb-rn": "^2.0.0-beta.10",
+    "@react-native-community/datetimepicker": "2.3.0",
+    "prop-types": "15.7.2",
+    "react": "16.13.1",
+    "react-native": "0.60.5",
+    "react-native-gesture-handler": "1.4.1",
+    "react-native-image-zoom-viewer": "2.2.27",
+    "react-native-reanimated": "1.2.0",
+    "react-native-screens": "2.0.0",
+    "react-native-svg": "11.0.1",
+    "react-navigation": "4.0.10",
+    "react-navigation-stack": "1.10.3",
+    "react-redux": "^5.1.2",
+    "redux": "^4.0.1",
+    "redux-promise-middleware": "^5.1.1"
+  }
+}

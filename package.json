@@ -1,6 +1,6 @@
 {
   "name": "moj-cli",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "description": "开发通用npm包脚手架命令工具",
   "main": "index.js",
   "bin": {
@@ -30,7 +30,8 @@
     "metalsmith": "^2.3.0",
     "ora": "^4.0.3",
     "pre-commit": "^1.2.2",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "shelljs": "^0.8.3"
   },
   "pre-commit": [
     "lint"

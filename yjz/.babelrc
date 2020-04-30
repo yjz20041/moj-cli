@@ -1,0 +1,19 @@
+/*用于工程内alias
+*/
+{
+    "plugins": [
+        [
+            "module-resolver",
+            {
+                "root": ["./src"],
+                "alias": {
+                    "@util": "./src/util",
+                    "@component": "./src/component",
+                    "@service": "./src/service",
+                    "@redux": "./src/redux",
+                    "@container": "./src/container"
+                }
+            }
+        ]
+    ]
+}
