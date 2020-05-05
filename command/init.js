@@ -65,6 +65,15 @@ const generate = (type, projectName, metaData = {}) => {
                   const source = `${d + item}`;
                   const target = source.replace('mojv_rn_ios', projectName);
                   shell.exec(`mv ${source} ${target}`);
+                });
+
+                [
+                  'mojv_rn_android'
+                ].forEach(item => {
+                  const d = `${distPath}/android/`;
+                  const source = `${d}app/src/main/java/com/${item}`;
+                  const target = source.replace('mojv_rn_android', projectName);
+                  shell.exec(`mv ${source} ${target}`);
                 })
                 
               }
