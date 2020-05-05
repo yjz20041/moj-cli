@@ -59,7 +59,10 @@ const generate = (type, projectName, metaData = {}) => {
                   'mojv_rn_ios-tvOS',
                   'mojv_rn_ios-tvOSTests',
                   'mojv_rn_ios.xcodeproj',
-                  'mojv_rn_iosTests'
+                  `${projectName}.xcodeproj/xcshareddata/xcschemes/mojv_rn_ios-tvOS.xcscheme`,
+                  `${projectName}.xcodeproj/xcshareddata/xcschemes/mojv_rn_ios.xcscheme`,
+                  'mojv_rn_iosTests',
+                  `${projectName}Tests/mojv_rn_iosTests.m`
                 ].forEach(item => {
                   const d = `${distPath}/ios/`;
                   const source = `${d + item}`;
