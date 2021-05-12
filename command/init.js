@@ -4,7 +4,7 @@ const path = require('path');
 const inquirer = require('inquirer');
 const fs = require('fs');
 const Metalsmith = require('metalsmith');
-const Handlebars = require('handlebars')
+const EJS = require('ejs');
 const rm = require('rimraf').sync;
 const ora = require('ora');
 const chalk = require('chalk');
@@ -23,7 +23,9 @@ const transform = (src, dist, metadata = {}) => {
         Object.keys(files).forEach(fileName => {
           if (/Podfile|(\.(jsx?|tsx?|package|json|md|java|xml|gradle|plist|xib|pbxproj|xcscheme|m))/.test(fileName) || /_BUCK/.test(fileName)) {
             const t = files[fileName].contents.toString()
-            files[fileName].contents = Buffer.from(Handlebars.compile(t)(meta))
+            files[fileName].contents = Buffer.from(EJS.compile(t, {
+              delimiter: '$'
+            })(meta))
           }
         })
         done();
@@ -69,7 +71,7 @@ const generate = (type, projectName, metaData = {}) => {
                   const target = source.replace('mojv_rn_ios', projectName);
                   shell.exec(`mv ${source} ${target}`);
                 });
-
+    
                 [
                   'mojv_rn_android'
                 ].forEach(item => {
@@ -78,7 +80,7 @@ const generate = (type, projectName, metaData = {}) => {
                   const target = source.replace('mojv_rn_android', projectName);
                   shell.exec(`mv ${source} ${target}`);
                 })
-                
+                  
               }
               console.log(chalk.green(`项目创建成功，项目类型为：${type}，请执行cd ${projectName} nenpm install 进行安装`));
               resolve();
@@ -116,7 +118,7 @@ const init = async () => {
       name: 'type',
       message: '请选择项目类型',
       type: 'list',
-      choices: ['component', 'h5', 'rn']
+      choices: ['activity', 'component', 'h5', 'rn', 'rni18n', 'egg', 'admin', 'regularcms']
     }
   ])).type;
   const answers = await inquirer.prompt([
@@ -163,15 +165,6 @@ const init = async () => {
     metadata.isRegular = componentType === 'regular';
   }
 
-  // 是否接入云音乐编码规范
-  // metadata.elint = (await inquirer.prompt([
-  //   {
-  //     name: 'elint',
-  //     message: '是否接入elint以及云音乐编码规范',
-  //     type: 'confirm'
-  //   }
-  // ])).elint;
-  // 暂时都设为true
   metadata.elint = true;
   generate(type, projectName, metadata);
 }
