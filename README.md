@@ -7,4 +7,4 @@
 
 1. npx moj-cli init
 2. 选择名称和工程类型
-3. 进入工程，执行nenpm install
+3. 进入工程，执行npm install
